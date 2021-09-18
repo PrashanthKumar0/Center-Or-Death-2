@@ -25,6 +25,7 @@ var enemy;
 var InitialEnemyRadius;
 const G_DUE_TO_GRAVITY = new Vec2(0, 0.01);
 var background_scene;
+
 function init_game() {
     let playerWidth = 90; // these player widths and height will come from sprite sheet later if i made it
     let playerHeight = 50; // just some hardcodes values for now :P
@@ -63,6 +64,7 @@ const SPIKE_AMP = 20;
 let then = 0;
 let theEndAnim = 0;
 let SCORE = 0;
+
 function game_loop() {
     let now = performance.now();
     let dt = now - then;
@@ -72,8 +74,7 @@ function game_loop() {
     // ctx.clearRect(0, 0, W, H);
     background_scene.render(W / 2 - player.position.x);
 
-    SCORE += getDscore();
-    {
+    SCORE += getDscore(); {
         let font_size = 12;
         ctx.textBaseline = "middle";
         ctx.textAlign = "left";
@@ -95,9 +96,10 @@ function game_loop() {
     // if (_CONTROLS_JOY_STICK && _CONTROLS_JOY_STICK_HR) {
     if (_CONTROLS_SHOOT_BUTTON && _CONTROLS_JOY_STICK && !isGameOver) {
         handle_touch_input();
-        if (!_CONTROLS_SHOOT_BUTTON.isActive) {
-            _CONTROLS_JOY_STICK.draw(ctx);
-        }
+        // if (!_CONTROLS_SHOOT_BUTTON.isActive) {
+        //     _CONTROLS_JOY_STICK.draw(ctx);
+        // }
+        _CONTROLS_JOY_STICK.draw(ctx);
         _CONTROLS_SHOOT_BUTTON.draw(ctx);
     }
 
@@ -127,8 +129,8 @@ function game_loop() {
                 let _BONUS = 250; // bonus score to kill moon
                 game_over_screen(
                     "YAY ! \n You WON 👏👏👏\n Final Score:" +
-                        (Math.floor(SCORE) + _BONUS) +
-                        " \n Refresh To Play Again \n Dont Be Lazy 😜"
+                    (Math.floor(SCORE) + _BONUS) +
+                    " \n Refresh To Play Again \n Dont Be Lazy 😜"
                 ); // Actually I Am Lazy
                 return;
             } else {
@@ -147,8 +149,8 @@ function game_loop() {
                 SOUND_POOL.playBgm("tank_angry", 1.0, false);
                 game_over_screen(
                     "GAME OVER ! \n You Have Been Crushed 💀 \n Final Score:" +
-                        SCORE.toFixed(0) +
-                        " \n Refresh To Play Again \n Dont Be Lazy 😜"
+                    SCORE.toFixed(0) +
+                    " \n Refresh To Play Again \n Dont Be Lazy 😜"
                 );
                 return;
             } else {
@@ -158,22 +160,14 @@ function game_loop() {
         }
         game_over_screen(
             "GAME OVER ! \n You Loose 🤪 \n Final Score:" +
-                SCORE.toFixed(0) +
-                " \nRefresh To Play Again \n Dont Be Lazy 😜"
+            SCORE.toFixed(0) +
+            " \nRefresh To Play Again \n Dont Be Lazy 😜"
         );
     }
 }
 
 function getDscore() {
-    return (
-        5 *
-        (1 /
-            (1 +
-                enemy.position
-                    .copy()
-                    .sub(new Vec2(W / 2, H / 2))
-                    .mag()))
-    );
+    return (5 * (1 / (1 + enemy.position.copy().sub(new Vec2(W / 2, H / 2)).mag())));
 }
 
 function constraint_enemy(sound = true) {
@@ -293,6 +287,7 @@ function player_play_random_moves(moveNum = 0) {
 }
 
 let spike_t = 0;
+
 function draw_spike_boundary() {
     let spike_sin = Math.sin(spike_t);
     spike_t += 0.01;

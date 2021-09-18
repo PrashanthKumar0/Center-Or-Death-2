@@ -3,6 +3,7 @@ onload = setup_audio;
 var TOUCH_ENABLED = false;
 var LANDSCAPE_MODE = true;
 var CLICK_TO_SHOOT_MODE = false;
+
 function main() {
     $("banner").style.display = "none";
     $("cnvs").style.display = "block";
@@ -16,11 +17,12 @@ function main() {
         CLICK_TO_SHOOT_MODE = !!$("clickToShootMode").checked;
     }
     // setTimeout(game_main, 250);
-    document.body.requestFullscreen().then(game_main).catch(game_main);
-    // game_main();
+    // document.body.requestFullscreen().then(game_main).catch(game_main);
+    game_main();
 }
 
 var SOUND_POOL;
+
 function setup_audio() {
     let _baseUrl = "./";
     let auds = [
@@ -63,12 +65,4 @@ function on_audio_loaded_callback() {
         $("loader").style.display = "none";
         $("banner").style.display = "block";
     }, 400);
-}
-
-function $(el) {
-    return document.getElementById(el);
-}
-
-function _(el) {
-    return document.querySelectorAll(el);
 }

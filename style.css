@@ -46,6 +46,15 @@ kbd {
     transform: rotate(90deg) translateY(-100%);
 }
 
+#debug{
+    position: fixed;
+    top:0px;
+    right:0px;
+    background: rgba(0,0,0,0.2);
+    z-index: 1000;
+    color:#FFF;
+}
+
 /* From my old game orbia */
 
 body {

@@ -79,6 +79,7 @@ function handle_mouse_input() {
 
 var _CONTROLS_JOY_STICK;
 var _CONTROLS_SHOOT_BUTTON;
+
 function init_touch() {
     let jR = Math.max(Math.min(W, H) / 5, 50);
     _CONTROLS_JOY_STICK = new JoyStick(new Vec2(jR + 10, H - jR - 10), jR);
@@ -99,6 +100,7 @@ function init_touch() {
 }
 
 let _CONTROLS_CANNON_PREV_ANGLE = 0;
+
 function handle_touch_input() {
     if (_CONTROLS_SHOOT_BUTTON.isActive) {
         player.shootBullet();
@@ -130,10 +132,10 @@ function set_touch_listeners() {
     ontouchstart = function (e) {
         let touchVec = new Vec2(e.touches[0].clientX, e.touches[0].clientY);
         if (LANDSCAPE_MODE) {
-            touchVec = new Vec2(touchVec.y,ctx.canvas.height - touchVec.x);
+            touchVec = new Vec2(touchVec.y, ctx.canvas.height - touchVec.x);
         }
-    
-        _CONTROLS_JOY_STICK.moveTo(touchVec);
+
+        // _CONTROLS_JOY_STICK.moveTo(touchVec);
         _CONTROLS_JOY_STICK.touchDown(touchVec);
 
         _CONTROLS_SHOOT_BUTTON.touchDown(touchVec);
@@ -145,7 +147,7 @@ function set_touch_listeners() {
 
         let id = 0;
         if (LANDSCAPE_MODE) {
-            touchVec = new Vec2(touchVec.y,ctx.canvas.height - touchVec.x);
+            touchVec = new Vec2(touchVec.y, ctx.canvas.height - touchVec.x);
         }
 
         _CONTROLS_JOY_STICK.update(touchVec);
