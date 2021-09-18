@@ -130,36 +130,40 @@ function handle_touch_input() {
 
 function set_touch_listeners() {
     ontouchstart = function (e) {
-        let touchVec = new Vec2(e.touches[0].clientX, e.touches[0].clientY);
-        if (LANDSCAPE_MODE) {
-            touchVec = new Vec2(touchVec.y, ctx.canvas.height - touchVec.x);
+        for (let i = 0; i < e.touches.length; i++) {
+            let id = e.touches[i].identifier;
+            let touchVec = new Vec2(e.touches[i].clientX, e.touches[i].clientY);
+            if (LANDSCAPE_MODE) {
+                touchVec = new Vec2(touchVec.y, ctx.canvas.height - touchVec.x);
+            }
+            // _CONTROLS_JOY_STICK.moveTo(touchVec);
+            _CONTROLS_JOY_STICK.touchDown(touchVec, id);
+
+            _CONTROLS_SHOOT_BUTTON.touchDown(touchVec, id);
+
         }
-
-        // _CONTROLS_JOY_STICK.moveTo(touchVec);
-        _CONTROLS_JOY_STICK.touchDown(touchVec);
-
-        _CONTROLS_SHOOT_BUTTON.touchDown(touchVec);
-
         // handle_joy_stick();
     };
     ontouchmove = function (e) {
-        let touchVec = new Vec2(e.touches[0].clientX, e.touches[0].clientY);
+        for (let i = 0; i < e.touches.length; i++) {
 
-        let id = 0;
-        if (LANDSCAPE_MODE) {
-            touchVec = new Vec2(touchVec.y, ctx.canvas.height - touchVec.x);
+            let touchVec = new Vec2(e.touches[i].clientX, e.touches[i].clientY);
+
+            let id = e.touches[i].identifier;
+            if (LANDSCAPE_MODE) {
+                touchVec = new Vec2(touchVec.y, ctx.canvas.height - touchVec.x);
+            }
+
+            _CONTROLS_JOY_STICK.update(touchVec, id);
+
+            _CONTROLS_SHOOT_BUTTON.touchDown(touchVec, id);
         }
-
-        _CONTROLS_JOY_STICK.update(touchVec);
-
-        _CONTROLS_SHOOT_BUTTON.touchDown(touchVec);
 
         // handle_joy_stick();
     };
     ontouchend = function (e) {
-        _CONTROLS_JOY_STICK.touchUp();
-
-        _CONTROLS_SHOOT_BUTTON.touchUp();
+        _CONTROLS_JOY_STICK.touchUp(e.changedTouches[0].identifier);
+        _CONTROLS_SHOOT_BUTTON.touchUp(e.changedTouches[0].identifier);
         SOUND_POOL.pause("tank_barrel");
         SOUND_POOL.pause("tank_move");
     };
