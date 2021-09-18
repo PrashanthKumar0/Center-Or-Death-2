@@ -129,6 +129,10 @@ function handle_touch_input() {
 function set_touch_listeners() {
     ontouchstart = function (e) {
         let touchVec = new Vec2(e.touches[0].clientX, e.touches[0].clientY);
+        if (LANDSCAPE_MODE) {
+            touchVec = new Vec2(touchVec.y,ctx.canvas.height - touchVec.x);
+        }
+    
         _CONTROLS_JOY_STICK.moveTo(touchVec);
         _CONTROLS_JOY_STICK.touchDown(touchVec);
 
@@ -138,6 +142,12 @@ function set_touch_listeners() {
     };
     ontouchmove = function (e) {
         let touchVec = new Vec2(e.touches[0].clientX, e.touches[0].clientY);
+
+        let id = 0;
+        if (LANDSCAPE_MODE) {
+            touchVec = new Vec2(touchVec.y,ctx.canvas.height - touchVec.x);
+        }
+
         _CONTROLS_JOY_STICK.update(touchVec);
 
         _CONTROLS_SHOOT_BUTTON.touchDown(touchVec);

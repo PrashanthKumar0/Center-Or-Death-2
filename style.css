@@ -37,7 +37,8 @@ kbd {
 }
 
 .landscape {
-    width: 100vh;
+    width: auto;
+    height: 100vw;
     position: fixed;
     top: 0px;
     left: 0px;
