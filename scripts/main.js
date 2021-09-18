@@ -17,8 +17,8 @@ function main() {
         CLICK_TO_SHOOT_MODE = !!$("clickToShootMode").checked;
     }
     // setTimeout(game_main, 250);
-    // document.body.requestFullscreen().then(game_main).catch(game_main);
-    game_main();
+    document.body.requestFullscreen().then(game_main).catch(game_main);
+    // game_main();
 }
 
 var SOUND_POOL;
