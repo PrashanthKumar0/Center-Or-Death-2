@@ -26,9 +26,11 @@ function _(el) {
 
 // DEBUG FUNCTIONS
 function DebugA(msg) { // append
+    return;
     $("debug").innerHTML += "<br>" + msg;
 }
 
 function Debug(msg) { // truncate
+    return;
     $("debug").innerHTML = msg;
 }
