@@ -18,7 +18,12 @@ class JoyStick {
         // this.dR = this.radius / 5; // nothing special :P see under draw()
     }
     touchDown(touchPos, touchId = 0) {
-        if (Math.hypot(this.position.x - touchPos.x, this.position.y - touchPos.y) <= this.radius) {
+        if (
+            Math.hypot(
+                this.position.x - touchPos.x,
+                this.position.y - touchPos.y
+            ) <= this.radius
+        ) {
             this.isActive = true;
             this.touchId = touchId;
             this.update(touchPos);
@@ -37,7 +42,8 @@ class JoyStick {
         return this.capNormVec.copy();
     }
 
-    update(touchPos, touchId = 0) {// TODO: see if touchId is really needed here 
+    update(touchPos, touchId = 0) {
+        // TODO: see if touchId is really needed here
         if (this.isActive && this.touchId == touchId) {
             let diff = touchPos.copy().sub(this.position);
             let dist = diff.mag();
@@ -54,7 +60,7 @@ class JoyStick {
     }
 
     resetJoy() {
-        this.capPos = this.position; // idk what they actually call that lil springy geary thingy        
+        this.capPos = this.position; // idk what they actually call that lil springy geary thingy
         this.capVec = new Vec2(0, 0); // a vector whose mag <= 1 representing amount and direction of joystick
     }
 
@@ -82,7 +88,6 @@ class JoyStick {
         ctx.stroke();
         ctx.closePath();
 
-
         // Ref
         ctx.fillStyle = "rgba(0,0,0,0.5)";
         ctx.beginPath();
@@ -97,9 +102,6 @@ class JoyStick {
         ctx.stroke();
         ctx.closePath();
 
-
-
-
         // RADAR
         // for (let r = 1; r < this.radius; r += this.dR) {
         //     ctx.beginPath();
@@ -107,7 +109,6 @@ class JoyStick {
         //     ctx.stroke();
         //     ctx.closePath();
         // }
-
 
         ctx.fillStyle = "rgba(255,0,0,0.2)";
         if (this.isActive) {
@@ -118,8 +119,6 @@ class JoyStick {
         ctx.arc(this.capPos.x, this.capPos.y, this.capRadius, 0, this.TWO_PI);
         ctx.fill();
         ctx.closePath();
-
-
     }
 }
 
@@ -134,15 +133,20 @@ class Button {
     }
 
     touchDown(touchPos, touchId = 0) {
-        if (Math.hypot(this.position.x - touchPos.x, this.position.y - touchPos.y) <= this.radius) {
+        if (
+            Math.hypot(
+                this.position.x - touchPos.x,
+                this.position.y - touchPos.y
+            ) <= this.radius
+        ) {
             this.isActive = true;
             this.touchId = touchId;
             // this.update(touchPos);
         }
     }
 
-    update(touchPos, touchId = 0) { //nothing here .. just a stub
-
+    update(touchPos, touchId = 0) {
+        //nothing here .. just a stub
     }
 
     touchUp(touchId = 0) {
@@ -164,7 +168,7 @@ class Button {
         ctx.fill();
         ctx.closePath();
 
-        ctx.font = (this.radius ) + "px Arial";
+        ctx.font = this.radius + "px Arial";
         ctx.textBaseline = "middle";
         ctx.textAlign = "center";
         ctx.fillText(this.char, this.position.x, this.position.y);
@@ -209,16 +213,12 @@ class Button {
 
 //         ctx.fillRect(this.center.x - 2, this.center.y - 2, 4, 4);
 
-
 //         ctx.strokeStyle = "rgba(255,255,255,0.1)";
 //         ctx.beginPath();
 //         ctx.moveTo(this.center.x, this.center.y);
 //         ctx.lineTo(this.capPos.x, this.capPos.y);
 //         ctx.stroke();
 //         ctx.closePath();
-
-
-
 
 //         // RADAR
 //         // for (let r = 1; r < this.radius; r += this.dR) {
@@ -227,7 +227,6 @@ class Button {
 //         //     ctx.stroke();
 //         //     ctx.closePath();
 //         // }
-
 
 //         ctx.fillStyle = "rgba(255,0,0,0.2)";
 //         if (this.isActive) {
@@ -249,7 +248,7 @@ class Button {
 //     }
 
 //     resetJoy() {
-//         this.capPos = this.center.copy(); // idk what they actually call that lil springy geary thingy        
+//         this.capPos = this.center.copy(); // idk what they actually call that lil springy geary thingy
 //         this.capVecX = 0; // a vector whose mag <= 1 representing amount and direction of joystick
 //     }
 
@@ -283,6 +282,5 @@ class Button {
 //             this.capVecX = (threshold / this.hWidth) * dir;
 //         }
 //     }
-
 
 // }

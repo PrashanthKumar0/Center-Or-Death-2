@@ -15,5 +15,4 @@ class Bullet extends Particle {
         ctx.fill();
         ctx.closePath();
     }
-
 }
