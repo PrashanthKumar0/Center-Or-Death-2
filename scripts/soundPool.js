@@ -142,7 +142,7 @@ class SoundPool {
         // return false;
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                this.sounds[i].aud.pause();
+                this.sounds[i].aud.pause().catch(function(err){});
                 this.sounds[i].aud.currentTime = 0;
             }
         }
