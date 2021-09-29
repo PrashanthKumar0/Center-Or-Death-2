@@ -150,7 +150,7 @@ class SoundPool {
 
                 setTimeout((function () {
                     try {
-                        
+
                         if (this.sounds[i].aud._playing) {
                             this.sounds[i].aud.pause();
                             this.sounds[i].aud._playing = true; // ? what am i doing ?

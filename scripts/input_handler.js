@@ -164,7 +164,7 @@ function set_touch_listeners() {
     ontouchend = function (e) {
         _CONTROLS_JOY_STICK.touchUp(e.changedTouches[0].identifier);
         _CONTROLS_SHOOT_BUTTON.touchUp(e.changedTouches[0].identifier);
-        SOUND_POOL.pause("tank_barrel");
-        SOUND_POOL.pause("tank_move");
+        // SOUND_POOL.pause("tank_barrel");
+        // SOUND_POOL.pause("tank_move");
     };
 }
