@@ -141,8 +141,10 @@ class SoundPool {
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
                 if (!this.sounds[i].aud.paused) {
-                    this.sounds[i].aud.pause();
+                    this.sounds[i].aud.play().then((p)=>this.sounds[i].aud.pause());
+                    return;
                 }
+                this.sounds[i].aud.pause();
             }
         }
     }
