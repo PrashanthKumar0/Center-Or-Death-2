@@ -16,6 +16,7 @@ function main() {
     if ($("clickToShootMode")) {
         CLICK_TO_SHOOT_MODE = !!$("clickToShootMode").checked;
     }
+    // setup_audio();
     // setTimeout(game_main, 250);
     // document.body.requestFullscreen().then(game_main).catch(game_main);
     game_main();

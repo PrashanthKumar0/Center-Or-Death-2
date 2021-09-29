@@ -3,6 +3,10 @@
     Dependencies : Vec2.js , UTILS.js
 */
 
+
+// badly written :(
+// dont read this part
+
 class Player {
     constructor(positionVec2, width, height, cannonWidth, cannonHeight) {
         this.position = positionVec2.copy();
