@@ -144,7 +144,7 @@ class SoundPool {
             if (this.sounds[i].name == name) {
                 let aProm=this.sounds[i].aud.play();
                 if(aProm){
-                      aProm.then(function(){this.sounds[i].aud.pause();});
+                      aProm.then(function(){this.sounds[i].aud.pause();}.bind(this));
                 
                     // aProm.catch(function(err){ });
                 }
