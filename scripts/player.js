@@ -59,7 +59,7 @@ class Player {
                     .copy()
                     .scale(
                         -(this.boundingRadius + enemy.radius) +
-                            Math.sqrt(enemy_cannon_dist)
+                        Math.sqrt(enemy_cannon_dist)
                     )
             );
             this.alive = false;
@@ -93,8 +93,8 @@ class Player {
             cannonHeight =
                 cannonHeight -
                 5 *
-                    (this.bulletShootAnimationLife /
-                        this.bulletShootAnimationMaxLife);
+                (this.bulletShootAnimationLife /
+                    this.bulletShootAnimationMaxLife);
             this.bulletShootAnimationLife--;
         }
 

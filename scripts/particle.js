@@ -26,13 +26,13 @@ class Particle {
         this.maxLife = maxLife;
         this.color =
             _PARTICLE_COLORS[
-                Math.round(Math.random() * _PARTICLE_COLORS.length)
+            Math.round(Math.random() * _PARTICLE_COLORS.length)
             ];
         this.shape =
             _PARTICLE_SHAPES[
-                _PARTICLE_SHAPES_KEYS[
-                    Math.round(Math.random() * _PARTICLE_SHAPES_KEYS.length)
-                ]
+            _PARTICLE_SHAPES_KEYS[
+            Math.round(Math.random() * _PARTICLE_SHAPES_KEYS.length)
+            ]
             ];
     }
 
