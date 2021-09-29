@@ -158,7 +158,7 @@ class Button {
     }
 
     draw(ctx) {
-        ctx.fillStyle = "rgba(255,255,255,0.1)";
+        ctx.fillStyle = "rgba(255,255,255,0.25)";
         if (this.isActive) {
             ctx.fillStyle = "rgba(255,255,255,0.5)";
         }
