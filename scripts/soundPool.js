@@ -144,7 +144,11 @@ class SoundPool {
             if (this.sounds[i].name == name) {
                                 
                 setTimeout((function(){
-                    this.sounds[i].aud.pause();
+                    try{
+                        this.sounds[i].aud.pause();
+                    }catch(err){
+
+                    }
                 }).bind(this),0);
 
                 this.sounds[i].aud.currentTime = 0;
