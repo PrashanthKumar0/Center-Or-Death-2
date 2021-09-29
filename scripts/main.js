@@ -38,7 +38,7 @@ function setup_audio() {
         new Sound("wall_collide", _baseUrl + "Audio/SFX/kick-tech-5825.mp3"),
         new Sound(
             "tank_destroyed",
-            _baseUrl + "Audio/SFX/transmission-activated.wav"
+            _baseUrl + "Audio/SFX/transmission-activated.mp3"
         ),
         new Sound("tank_angry", _baseUrl + "Audio/SFX/plasma-gun-power.wav"),
 

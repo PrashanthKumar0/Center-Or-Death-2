@@ -44,6 +44,8 @@ let game_over_screenMSG;
 
 
 function init_game() {
+    let restartBtn = document.getElementById("restartBtn");
+    if (restartBtn) restartBtn.classList.remove('show');
     // required by game_loop()
     isGameOver = false;
     then = 0;
@@ -154,8 +156,8 @@ function game_loop() {
                 let _BONUS = 250; // bonus score to kill moon
                 isGameOver = true; // ? incase
                 game_over_screen(
-                    "YAY ! \n You WON 👏👏👏\n Final Score:" 
-                    + (Math.floor(SCORE) + _BONUS) 
+                    "YAY ! \n You WON 👏👏👏\n Final Score:"
+                    + (Math.floor(SCORE) + _BONUS)
                     // + " \n Refresh To Play Again \n Dont Be Lazy 😜"
                 ); // Actually I Am Lazy
                 return;
@@ -175,8 +177,8 @@ function game_loop() {
                 SOUND_POOL.playBgm("tank_angry", 1.0, false);
                 isGameOver = true; // ? incase
                 game_over_screen(
-                    "GAME OVER ! \n You Have Been Crushed 💀 \n Final Score:" 
-                    + SCORE.toFixed(0) 
+                    "GAME OVER ! \n You Have Been Crushed 💀 \n Final Score:"
+                    + SCORE.toFixed(0)
                     // + " \n Refresh To Play Again \n Dont Be Lazy 😜"
                 );
                 return;
@@ -187,8 +189,8 @@ function game_loop() {
         }
         isGameOver = true; // ? incase
         game_over_screen(
-            "GAME OVER ! \n You Loose 🤪 \n Final Score:" 
-            + SCORE.toFixed(0) 
+            "GAME OVER ! \n You Loose 🤪 \n Final Score:"
+            + SCORE.toFixed(0)
             // +" \nRefresh To Play Again \n Dont Be Lazy 😜"
         );
     }
@@ -244,9 +246,13 @@ function game_over_screen(message) {
     // ctx.clearRect(0, 0, W, H);
     background_scene.render(W / 2 - player.position.x);
 
-    if (typeof message != typeof "hey") message = game_over_screenMSG;
-    // dk why i am unable to pass arguments on requestAnimationFrame()
-    else game_over_screenMSG = message;
+    if (typeof message != typeof "hey") {
+        message = game_over_screenMSG;
+    } else { // dk why i am unable to pass arguments on requestAnimationFrame()
+        game_over_screenMSG = message;
+        let restartBtn = document.getElementById("restartBtn");
+        if (restartBtn) restartBtn.classList.add('show');
+    }
 
     // // particleSystem.update(ctx);
     particleSystem.draw(ctx); // make sure we render our particle system first .
