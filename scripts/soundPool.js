@@ -89,7 +89,7 @@ class SoundPool {
                 this.sounds[i].aud.volume = volume;
                 this.sounds[i].aud.currentTime = 0;
                 if (this.sounds[i].aud.paused) {
-                    this.sounds[i].aud.play(); // play main file if all slot is full
+                    this.sounds[i].aud.play().catch(function(err){ }); // play main file if all slot is full
                     this.sounds[i].aud.loop = false;
                 }
                 // }
@@ -142,10 +142,10 @@ class SoundPool {
         // return false;
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                try{
-                    this.sounds[i].aud.pause();
-                    this.sounds[i].aud.currentTime = 0;
-                } catch(err) { }
+               
+                this.sounds[i].aud.pause().catch(function(err){ });
+                this.sounds[i].aud.currentTime = 0;
+                
             }
         }
     }
