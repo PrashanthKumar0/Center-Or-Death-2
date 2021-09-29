@@ -90,11 +90,13 @@ class SoundPool {
                 this.sounds[i].aud.currentTime = 0;
                 if (this.sounds[i].aud.paused) {
                     this.sounds[i].aud.play(); // play main file if all slot is full
+                    this.sounds[i].aud.loop = false;
                 }
                 // }
             }
         }
 
+        // ANCHOR : This doesnt work on android :(
         // for (let i = 0; i < this.sounds.length; i++) {
         //   if (this.sounds[i].name == name) {
         //     // this.sounds[i].aud.play();
@@ -140,16 +142,8 @@ class SoundPool {
         // return false;
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                let prom = this.sounds[i].aud.play();
-                if (prom) {
-                    prom.then(function (p) {
-                        this.sounds[i].aud.pause();
-                        this.sounds[i].aud.currentTime = 0;
-                    }).catch(function (e) { });
-
-                    // return;
-                }
-                // this.sounds[i].aud.pause();
+                this.sounds[i].aud.pause();
+                this.sounds[i].aud.currentTime = 0;
             }
         }
     }
