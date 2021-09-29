@@ -112,7 +112,7 @@ function handle_touch_input() {
         let jS = _CONTROLS_JOY_STICK.getCap();
         player.setCannonAngle(Math.atan2(jS.y, jS.x) + Math.PI / 2);
         if (player.cannonAngle != _CONTROLS_CANNON_PREV_ANGLE) {
-            SOUND_POOL.playBgm("tank_barrel", _CONTROLS_TANK_MOVE_VOLUME);
+            SOUND_POOL.play("tank_barrel", _CONTROLS_TANK_MOVE_VOLUME);
         }
         _CONTROLS_CANNON_PREV_ANGLE = player.cannonAngle;
 
@@ -123,7 +123,7 @@ function handle_touch_input() {
         rX.scale(rM);
         if (rD > 0.3) {
             player.move(rX.x);
-            SOUND_POOL.playBgm("tank_move", _CONTROLS_TANK_MOVE_VOLUME);
+            SOUND_POOL.play("tank_move", _CONTROLS_TANK_MOVE_VOLUME);
         }
     }
 }
@@ -164,7 +164,7 @@ function set_touch_listeners() {
     ontouchend = function (e) {
         _CONTROLS_JOY_STICK.touchUp(e.changedTouches[0].identifier);
         _CONTROLS_SHOOT_BUTTON.touchUp(e.changedTouches[0].identifier);
-        // SOUND_POOL.pause("tank_barrel");
-        // SOUND_POOL.pause("tank_move");
+        SOUND_POOL.pause("tank_barrel");
+        SOUND_POOL.pause("tank_move");
     };
 }
