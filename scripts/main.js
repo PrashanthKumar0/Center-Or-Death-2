@@ -40,7 +40,7 @@ function setup_audio() {
             "tank_destroyed",
             _baseUrl + "Audio/SFX/transmission-activated.mp3"
         ),
-        new Sound("tank_angry", _baseUrl + "Audio/SFX/plasma-gun-power.wav"),
+        new Sound("tank_angry", _baseUrl + "Audio/SFX/plasma-gun-power.mp3"),
 
         new Sound(
             "bgm_main",
