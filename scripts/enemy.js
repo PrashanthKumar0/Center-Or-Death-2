@@ -66,9 +66,9 @@ class Enemy {
             ctx.beginPath();
             ctx.arc(
                 this.spots[i].x * this.radiusDecreasePercentage +
-                    this.position.x,
+                this.position.x,
                 this.spots[i].y * this.radiusDecreasePercentage +
-                    this.position.y,
+                this.position.y,
                 r,
                 0,
                 TWO_PI

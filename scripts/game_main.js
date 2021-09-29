@@ -26,7 +26,37 @@ var InitialEnemyRadius;
 const G_DUE_TO_GRAVITY = new Vec2(0, 0.01);
 var background_scene;
 
+
+
+// required by game_loop()
+var isGameOver = false;
+const SPIKE_AMP = 20;
+let then = 0;
+let theEndAnim = 0;
+let SCORE = 0;
+
+
+// required by game_over_screen(message)
+let loop_back = 0;
+let loop_back_move_num = Math.round(5 * Math.random());
+let game_over_screenMSG;
+
+
+
 function init_game() {
+    // required by game_loop()
+    isGameOver = false;
+    then = 0;
+    theEndAnim = 0;
+    SCORE = 0;
+
+
+    // required by game_over_screen(message)
+    loop_back = 0;
+    loop_back_move_num = Math.round(5 * Math.random());
+    game_over_screenMSG;
+
+
     let playerWidth = 90; // these player widths and height will come from sprite sheet later if i made it
     let playerHeight = 50; // just some hardcodes values for now :P
     let playerConnonHeight = 70;
@@ -59,11 +89,6 @@ function init_game() {
     game_loop();
 }
 
-var isGameOver = false;
-const SPIKE_AMP = 20;
-let then = 0;
-let theEndAnim = 0;
-let SCORE = 0;
 
 function game_loop() {
     let now = performance.now();
@@ -127,10 +152,11 @@ function game_loop() {
             }
             if (particleSystem.isEmpty()) {
                 let _BONUS = 250; // bonus score to kill moon
+                isGameOver = true; // ? incase
                 game_over_screen(
-                    "YAY ! \n You WON 👏👏👏\n Final Score:" +
-                    (Math.floor(SCORE) + _BONUS) +
-                    " \n Refresh To Play Again \n Dont Be Lazy 😜"
+                    "YAY ! \n You WON 👏👏👏\n Final Score:" 
+                    + (Math.floor(SCORE) + _BONUS) 
+                    // + " \n Refresh To Play Again \n Dont Be Lazy 😜"
                 ); // Actually I Am Lazy
                 return;
             } else {
@@ -147,10 +173,11 @@ function game_loop() {
             if (particleSystem.isEmpty()) {
                 particleSystem.spawnAt(player.position);
                 SOUND_POOL.playBgm("tank_angry", 1.0, false);
+                isGameOver = true; // ? incase
                 game_over_screen(
-                    "GAME OVER ! \n You Have Been Crushed 💀 \n Final Score:" +
-                    SCORE.toFixed(0) +
-                    " \n Refresh To Play Again \n Dont Be Lazy 😜"
+                    "GAME OVER ! \n You Have Been Crushed 💀 \n Final Score:" 
+                    + SCORE.toFixed(0) 
+                    // + " \n Refresh To Play Again \n Dont Be Lazy 😜"
                 );
                 return;
             } else {
@@ -158,10 +185,11 @@ function game_loop() {
             }
             return;
         }
+        isGameOver = true; // ? incase
         game_over_screen(
-            "GAME OVER ! \n You Loose 🤪 \n Final Score:" +
-            SCORE.toFixed(0) +
-            " \nRefresh To Play Again \n Dont Be Lazy 😜"
+            "GAME OVER ! \n You Loose 🤪 \n Final Score:" 
+            + SCORE.toFixed(0) 
+            // +" \nRefresh To Play Again \n Dont Be Lazy 😜"
         );
     }
 }
@@ -210,9 +238,6 @@ function constraint_enemy(sound = true) {
     }
 }
 
-let loop_back = 0;
-let loop_back_move_num = Math.round(5 * Math.random());
-let game_over_screenMSG;
 
 function game_over_screen(message) {
     player.alive = true; //?incase
@@ -256,7 +281,9 @@ function game_over_screen(message) {
         );
     }
     // debugger;
-    requestAnimationFrame(game_over_screen);
+    if (isGameOver) {
+        requestAnimationFrame(game_over_screen);
+    }
 }
 
 function player_play_random_moves(moveNum = 0) {
