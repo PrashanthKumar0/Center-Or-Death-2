@@ -88,7 +88,9 @@ class SoundPool {
                 // if (this.sounds[i].aud.paused) {
                 this.sounds[i].aud.volume = volume;
                 this.sounds[i].aud.currentTime = 0;
-                this.sounds[i].aud.play(); // play main file if all slot is full
+                if (this.sounds[i].aud.paused) {
+                    this.sounds[i].aud.play(); // play main file if all slot is full
+                }
                 // }
             }
         }
@@ -117,7 +119,9 @@ class SoundPool {
     playBgm(name, volume = 0.3, loop = false) {
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                this.sounds[i].aud.play();
+                if (this.sounds[i].aud.paused) {
+                    this.sounds[i].aud.play();
+                }
                 this.sounds[i].aud.volume = volume;
                 this.sounds[i].aud.loop = loop;
             }
@@ -136,9 +140,9 @@ class SoundPool {
         // return false;
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                if (!this.sounds[i].aud.paused) {
+                // if (!this.sounds[i].aud.paused) {
                     this.sounds[i].aud.pause();
-                }
+                // }
             }
         }
     }
