@@ -53,10 +53,11 @@ class SoundPool {
         //         return;
         //     }
         // }
-        if (ev.target.loaded) {
+        if (ev.target._loaded) {
             return;
         } else {
-            ev.target.loaded = true; //cool Problem solved? 🤣
+            ev.target._playing = false; // ? what am i doing ?
+            ev.target._loaded = true; //cool Problem solved? 🤣
         }
         this.numLoaded++;
         if (this.onLoadProgress) {
@@ -89,7 +90,10 @@ class SoundPool {
                 this.sounds[i].aud.volume = volume;
                 this.sounds[i].aud.currentTime = 0;
                 if (this.sounds[i].aud.paused) {
-                    this.sounds[i].aud.play().catch(function(err){ }); // play main file if all slot is full
+                    this.sounds[i].aud.play().then((function () {
+                        this.sounds[i].aud._playing = true; // ? what am i doing ?
+                    }).bind(this)).catch(function (err) { }); // play main file if all slot is full
+
                     this.sounds[i].aud.loop = false;
                 }
                 // }
@@ -123,6 +127,7 @@ class SoundPool {
             if (this.sounds[i].name == name) {
                 if (this.sounds[i].aud.paused) {
                     this.sounds[i].aud.play();
+                    this.sounds[i].aud._playing = true; // ? what am i doing ?
                 }
                 this.sounds[i].aud.volume = volume;
                 this.sounds[i].aud.loop = loop;
@@ -142,17 +147,25 @@ class SoundPool {
         // return false;
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                                
-                setTimeout((function(){
-                    try{
-                        this.sounds[i].aud.pause();
-                    }catch(err){
+
+                setTimeout((function () {
+                    try {
+                        
+                        if (this.sounds[i].aud._playing) {
+                            this.sounds[i].aud.pause();
+                            this.sounds[i].aud._playing = true; // ? what am i doing ?
+                        } else {
+                            // setTimeout((function(){
+                            //     this.pause(name);
+                            // }).bind(this),10); // ? 😭😭😭😭
+                        }
+                    } catch (err) {
 
                     }
-                }).bind(this),0);
+                }).bind(this), 0);
 
                 this.sounds[i].aud.currentTime = 0;
-                
+
             }
         }
     }
