@@ -9,7 +9,7 @@ const MOUSE = {
     state: MOUSE_STATE.up,
 };
 
-const _CONTROLS_TANK_FIRE_VOLUME = 0.7;
+const _CONTROLS_TANK_FIRE_VOLUME = 0.6;
 const _CONTROLS_TANK_MOVE_VOLUME = 0.4;
 const _CONTROLS_TANK_BARREL_VOLUME = 0.4;
 
