@@ -105,7 +105,7 @@ let _CONTROLS_CANNON_PREV_ANGLE = 0;
 function handle_touch_input() {
     if (_CONTROLS_SHOOT_BUTTON.isActive) {
         player.shootBullet();
-        SOUND_POOL.playBgm("tank_fire", _CONTROLS_TANK_FIRE_VOLUME, 70);
+        SOUND_POOL.play("tank_fire", _CONTROLS_TANK_FIRE_VOLUME, 70);
         // return; // we dont want to do anything else
     }
 
@@ -113,7 +113,7 @@ function handle_touch_input() {
         let jS = _CONTROLS_JOY_STICK.getCap();
         player.setCannonAngle(Math.atan2(jS.y, jS.x) + Math.PI / 2);
         if (player.cannonAngle != _CONTROLS_CANNON_PREV_ANGLE) {
-            SOUND_POOL.playBgm("tank_barrel", _CONTROLS_TANK_BARREL_VOLUME);
+            SOUND_POOL.play("tank_barrel", _CONTROLS_TANK_BARREL_VOLUME);
         }
         _CONTROLS_CANNON_PREV_ANGLE = player.cannonAngle;
 
@@ -124,7 +124,7 @@ function handle_touch_input() {
         rX.scale(rM);
         if (rD > 0.3) {
             player.move(rX.x);
-            SOUND_POOL.playBgm("tank_move", _CONTROLS_TANK_MOVE_VOLUME);
+            SOUND_POOL.play("tank_move", _CONTROLS_TANK_MOVE_VOLUME);
         }
     }
 }
