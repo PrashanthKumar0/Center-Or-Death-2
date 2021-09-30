@@ -9,19 +9,20 @@ const MOUSE = {
     state: MOUSE_STATE.up,
 };
 
-var _CONTROLS_TANK_FIRE_VOLUME = 0.7;
-var _CONTROLS_TANK_MOVE_VOLUME = 0.3;
+const _CONTROLS_TANK_FIRE_VOLUME = 0.7;
+const _CONTROLS_TANK_MOVE_VOLUME = 0.4;
+const _CONTROLS_TANK_BARREL_VOLUME = 0.4;
 
 function handle_keyboard_input() {
     KEYBOARD.key_presses.forEach((key) => {
         switch (key) {
             case "q":
                 player.cannonAngle -= 0.1;
-                SOUND_POOL.playBgm("tank_barrel", _CONTROLS_TANK_MOVE_VOLUME);
+                SOUND_POOL.playBgm("tank_barrel", _CONTROLS_TANK_BARREL_VOLUME);
                 break;
             case "e":
                 player.cannonAngle += 0.1;
-                SOUND_POOL.playBgm("tank_barrel", _CONTROLS_TANK_MOVE_VOLUME); // volume will be same?
+                SOUND_POOL.playBgm("tank_barrel", _CONTROLS_TANK_BARREL_VOLUME); // volume will be same?
                 break;
             case "arrowleft":
             case "a":
@@ -112,7 +113,7 @@ function handle_touch_input() {
         let jS = _CONTROLS_JOY_STICK.getCap();
         player.setCannonAngle(Math.atan2(jS.y, jS.x) + Math.PI / 2);
         if (player.cannonAngle != _CONTROLS_CANNON_PREV_ANGLE) {
-            SOUND_POOL.play("tank_barrel", _CONTROLS_TANK_MOVE_VOLUME);
+            SOUND_POOL.play("tank_barrel", _CONTROLS_TANK_BARREL_VOLUME);
         }
         _CONTROLS_CANNON_PREV_ANGLE = player.cannonAngle;
 
