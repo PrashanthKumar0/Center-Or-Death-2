@@ -106,7 +106,7 @@ function handle_touch_input() {
     if (_CONTROLS_SHOOT_BUTTON.isActive) {
         player.shootBullet();
         SOUND_POOL.play("tank_fire", _CONTROLS_TANK_FIRE_VOLUME, 70);
-        return; // we dont want to do anything else
+        // return; // we dont want to do anything else
     }
 
     if (_CONTROLS_JOY_STICK.isActive) {
@@ -167,5 +167,6 @@ function set_touch_listeners() {
         _CONTROLS_SHOOT_BUTTON.touchUp(e.changedTouches[0].identifier);
         SOUND_POOL.pause("tank_barrel");
         SOUND_POOL.pause("tank_move");
+        console.log('te'); // temp
     };
 }
