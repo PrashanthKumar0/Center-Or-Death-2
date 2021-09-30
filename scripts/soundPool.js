@@ -95,7 +95,7 @@ class SoundPool {
                         // this.sounds[i].aud.loop = true; // ? what am i doing ?
                     }).bind(this)).catch(function (err) { }); // play main file if all slot is full
 
-                    this.sounds[i].aud.loop = true;
+                    this.sounds[i].aud.loop = false;
                 }
                 // }
             }
@@ -156,9 +156,9 @@ class SoundPool {
                             this.sounds[i].aud.pause();
                             this.sounds[i].aud._playing = false; // ? what am i doing ?
                         } else {
-                            // setTimeout((function(){
-                            //     this.pause(name);
-                            // }).bind(this),10); // ? 😭😭😭😭
+                               setTimeout((function(){
+                                   this.pause(name);
+                               }).bind(this),10); // ? 😭😭😭😭
                         }
                     } catch (err) {
 
