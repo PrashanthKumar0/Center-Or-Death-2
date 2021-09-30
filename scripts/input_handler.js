@@ -167,6 +167,5 @@ function set_touch_listeners() {
         _CONTROLS_SHOOT_BUTTON.touchUp(e.changedTouches[0].identifier);
         SOUND_POOL.pause("tank_barrel");
         SOUND_POOL.pause("tank_move");
-        console.log('te'); // temp
     };
 }
