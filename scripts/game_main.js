@@ -153,7 +153,7 @@ function game_loop() {
                 theEndAnim = 1;
             }
             if (particleSystem.isEmpty()) {
-                let _BONUS = 250; // bonus score to kill moon
+                let _BONUS = 1000; // bonus score to kill moon
                 isGameOver = true; // ? incase
                 game_over_screen(
                     "YAY ! \n You WON 👏👏👏\n Final Score:"

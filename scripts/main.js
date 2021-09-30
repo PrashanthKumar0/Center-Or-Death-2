@@ -44,7 +44,7 @@ function setup_audio() {
 
         new Sound(
             "bgm_main",
-            _baseUrl + "Audio/Music/ES_Fair N Square - William Benckert.mp3"
+            _baseUrl + "Audio/Music/geovane-bruno-game-amp-action-2205.mp3" //from pixabay
         ),
     ];
 

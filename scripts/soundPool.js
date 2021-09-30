@@ -92,6 +92,7 @@ class SoundPool {
                 if (this.sounds[i].aud.paused) {
                     this.sounds[i].aud.play().then((function () {
                         this.sounds[i].aud._playing = true; // ? what am i doing ?
+                        // this.sounds[i].aud.loop = true; // ? what am i doing ?
                     }).bind(this)).catch(function (err) { }); // play main file if all slot is full
 
                     this.sounds[i].aud.loop = false;

@@ -88,7 +88,7 @@ class StarBuildingScene {
             w = Math.round(this.rand(this.buildingMinW, this.buildingMaxW));
             let y = H / 2 + this.rand(0, H / 3);
             let h = H - y;
-            let p = 0.01;
+            let p = 0.05;
             let color = "#0A0A0A"; // fade away :P farthest building appears lighter
             this.buildings.push(new Building({ x, y }, w, h, color, p)); // TODO : use vec2
         }
@@ -98,7 +98,7 @@ class StarBuildingScene {
             w = Math.round(this.rand(this.buildingMinW, this.buildingMaxW));
             let y = H / 2 + this.rand(0, H / 3);
             let h = H - y;
-            let p = 0.04;
+            let p = 0.1;
             let color = "#000"; // fade away :P farthest building appears lighter
             this.buildings.push(new Building({ x, y }, w, h, color, p)); // TODO : use vec2
         }

@@ -117,7 +117,7 @@ class Enemy {
     }
     impactMass(mass) {
         let dr = Math.sqrt((this.mass - mass) / Math.PI);
-        this.radius -= dr * 0.01;
+        this.radius -= dr * 0.001; 
         this.radiusDecreasePercentage = this.radius * this.invInitialRadius;
         this.healthPercentage =
             (this.radius - this.deathRadius) * this.diffInvDeathRadius;
