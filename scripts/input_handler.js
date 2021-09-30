@@ -73,7 +73,7 @@ function handle_mouse_input() {
     if (CLICK_TO_SHOOT_MODE) {
         if (MOUSE.state == MOUSE_STATE.down) {
             player.shootBullet();
-            SOUND_POOL.play("tank_fire", _CONTROLS_TANK_FIRE_VOLUME, 70);
+            SOUND_POOL.play("tank_fire", _CONTROLS_TANK_FIRE_VOLUME, 150);
         }
     }
 }

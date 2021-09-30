@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Monsterrat';
+    src: url('./fonts/Montserrat-Regular.ttf');
+}
+body{
+    font-family: 'Monsterrat';
+    font-size: 18px;
+    line-height: 2.3rem;
+}
 kbd {
     padding: 2px 10px;
     border: 2px ridge #fff;
@@ -140,6 +149,8 @@ button {
     color: aquamarine;
 }
 #loader {
+    font-family: initial;
+    line-height: initial;
     display: block;
     position: fixed;
     top: 50%;
@@ -177,9 +188,11 @@ button {
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
+h1:first-child{
+    margin-top: 0px !important;
+}
 h1 {
-    margin-top: 0px;
-    margin-bottom: 45px;
+    margin: 90px 0pc 45px 0px;
     color: #fff;
     text-align: center;
     position: relative;
@@ -201,7 +214,22 @@ h3 {
     color: #fff;
     margin: 20px 0px;
 }
-h3:before {
+ul{
+    /* display: flex;
+    flex-direction: column; */
+    padding:0px;
+    margin: auto;
+}
+.flex{
+    display: flex;
+    
+}
+ul li{
+    margin-bottom: 3.3rem;
+    list-style: none;
+}
+li:before
+,h3:before {
     content: "";
     display: inline-block;
     margin-right: 8px;
