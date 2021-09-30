@@ -154,7 +154,7 @@ class SoundPool {
 
                         if (this.sounds[i].aud._playing) {
                             this.sounds[i].aud.pause();
-                            this.sounds[i].aud._playing = true; // ? what am i doing ?
+                            this.sounds[i].aud._playing = false; // ? what am i doing ?
                         } else {
                             // setTimeout((function(){
                             //     this.pause(name);
