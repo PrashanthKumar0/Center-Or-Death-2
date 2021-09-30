@@ -154,6 +154,7 @@ class SoundPool {
 
                         if (this.sounds[i].aud._playing) {
                             this.sounds[i].aud.pause();
+                            this.sounds[i].aud.currentTime = 0;
                             this.sounds[i].aud._playing = false; // ? what am i doing ?
                         } else {
                                setTimeout((function(){
@@ -164,8 +165,6 @@ class SoundPool {
 
                     }
                 }).bind(this), 0);
-
-                this.sounds[i].aud.currentTime = 0;
 
             }
         }
