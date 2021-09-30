@@ -74,8 +74,8 @@ class JoyStick {
     }
     draw(ctx) {
         // if (!this.isActive) return; // TODO : see if this is ok to do>
-        ctx.fillStyle = "rgba(255,255,255,0.1)";
-        ctx.strokeStyle = "rgba(0,255,255,0.1)";
+        ctx.fillStyle = "rgba(255,255,255,0.25)";
+        ctx.strokeStyle = "rgba(0,255,255,0.25)";
         ctx.lineWidth = 2;
         if (this.isActive) {
             ctx.strokeStyle = "rgba(0,255,255,0.5)";
@@ -158,7 +158,7 @@ class Button {
     }
 
     draw(ctx) {
-        ctx.fillStyle = "rgba(255,255,255,0.1)";
+        ctx.fillStyle = "rgba(255,255,255,0.35)";
         if (this.isActive) {
             ctx.fillStyle = "rgba(255,255,255,0.5)";
         }
