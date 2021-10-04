@@ -64,7 +64,7 @@ function init_game() {
     let playerConnonHeight = 70;
     let playerConnonWidth = 15;
 
-    InitialEnemyRadius = Math.max(playerWidth / 2, Math.min(W, H) / 7);
+    InitialEnemyRadius = Math.max(80, Math.max(playerWidth / 2, Math.min(W, H) / 7));
 
     player = new Player(
         new Vec2(W / 2 - playerWidth / 2, H - playerHeight - SPIKE_AMP),
@@ -155,6 +155,7 @@ function game_loop() {
             if (particleSystem.isEmpty()) {
                 let _BONUS = 1000; // bonus score to kill moon
                 isGameOver = true; // ? incase
+
                 game_over_screen(
                     "YAY ! \n You WON 👏👏👏\n Final Score:"
                     + (Math.floor(SCORE) + _BONUS)
@@ -212,6 +213,7 @@ function constraint_enemy(sound = true) {
     }
     if (enemy.position.y > H - enemy.radius - SPIKE_AMP / 2) {
         isGameOver = true;
+        // debugger;
         if (sound) SOUND_POOL.playBgm("wall_collide", 0.6, false);
         enemy.velocity.y *= -0.2;
         enemy.position.y = H - enemy.radius - SPIKE_AMP / 2;
@@ -243,6 +245,7 @@ function constraint_enemy(sound = true) {
 
 function game_over_screen(message) {
     player.alive = true; //?incase
+    particleSystem.draw(ctx);
     // ctx.clearRect(0, 0, W, H);
     background_scene.render(W / 2 - player.position.x);
 

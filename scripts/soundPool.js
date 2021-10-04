@@ -7,6 +7,13 @@ class Sound {
     }
 }
 
+/**
+ * play() is for playing sfx
+ * and playBgm() is for playing background 
+ * 
+ * I am using 2 different ways to make my work easier nothing else.
+ */
+
 class SoundPool {
     constructor(sounds, onLoadedCallback, onLoadProgress) {
         this.onLoadedCallback = onLoadedCallback;
@@ -36,13 +43,10 @@ class SoundPool {
     init() {
         for (let i = 0; i < this.sounds.length; i++) {
             this.sounds[i].aud.volume = 0;
-            //   this.sounds[i].aud.play().then((p) => {
-            //     this.sounds[i].aud.pause();
-            //     this.sounds[i].aud.currentTime = 0;
-            //   });
-            this.sounds[i].aud.play();
-            this.sounds[i].aud.pause();
-            this.sounds[i].aud.currentTime = 0;
+            this.sounds[i].aud.play().then((function (p) {
+                this.sounds[i].aud.pause();
+                this.sounds[i].aud.currentTime = 0;
+            }).bind(this));
         }
     }
 
@@ -56,7 +60,6 @@ class SoundPool {
         if (ev.target._loaded) {
             return;
         } else {
-            ev.target._playing = false; // ? what am i doing ?
             ev.target._loaded = true; //cool Problem solved? 🤣
         }
         this.numLoaded++;
@@ -69,7 +72,7 @@ class SoundPool {
         }
     }
 
-    play(name, volume = 0.7, delayTime, pool = false) {
+    play(name, volume = 0.7, max_play_time = Infinity, delayTime) {
         let now = performance.now();
 
         if (this.time_then == 0) {
@@ -81,46 +84,27 @@ class SoundPool {
             } else {
                 this.time_then = now;
             }
-            // console.log("dt", dt);
         }
+
 
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
-                // if (this.sounds[i].aud.paused) {
-                this.sounds[i].aud.volume = volume;
-                // this.sounds[i].aud.currentTime = 0;
-                if (this.sounds[i].aud.paused) {
-                    this.sounds[i].aud.play().then((function () {
-                        this.sounds[i].aud._playing = true; // ? what am i doing ?
-                        // this.sounds[i].aud.loop = true; // ? what am i doing ?
-                    }).bind(this)).catch(function (err) { }); // play main file if all slot is full
 
-                    this.sounds[i].aud.loop = false;
+                this.sounds[i].aud.volume = volume;
+
+                if (this.sounds[i].aud.currentTime >= max_play_time) {
+                    this.sounds[i].aud.currentTime = 0;
+                    // this.sounds[i].aud.play().then((function () { }).bind(this)).catch(function (err) { }); // play main file if all slot is full
+                    // this.sounds[i].aud.loop = false;
+                    // return;
                 }
+                // if (this.sounds[i].aud.paused) {
+                this.sounds[i].aud.play().then((function () { }).bind(this)).catch(function (err) { }); // play main file if all slot is full
+                this.sounds[i].aud.loop = false;
                 // }
+                return;
             }
         }
-
-        // ANCHOR : This doesnt work on android :(
-        // for (let i = 0; i < this.sounds.length; i++) {
-        //   if (this.sounds[i].name == name) {
-        //     // this.sounds[i].aud.play();
-        //     if (this.sound_pool.length >= this.MAX_SOUND_TRACKS && !pool) {
-        //       if (this.sounds[i].aud.paused) {
-        //         this.sounds[i].aud.volume = volume;
-        //         this.sounds[i].aud.currentTime = 0;
-        //         this.sounds[i].aud.play(); // play main file if all slot is full
-        //       }
-        //     } else {
-        //       // else play on sound_pool
-        //       let aud = new Audio(this.sounds[i].url);
-        //       aud.play();
-        //       aud.volume = volume;
-        //       this.sound_pool.push(aud);
-        //       aud.onended = this.onTrackEnd.bind(this);
-        //     }
-        //   }
-        // }
     }
 
     playBgm(name, volume = 0.3, loop = false) {
@@ -128,10 +112,10 @@ class SoundPool {
             if (this.sounds[i].name == name) {
                 if (this.sounds[i].aud.paused) {
                     this.sounds[i].aud.play();
-                    this.sounds[i].aud._playing = true; // ? what am i doing ?
                 }
                 this.sounds[i].aud.volume = volume;
                 this.sounds[i].aud.loop = loop;
+                return;
             }
         }
     }
@@ -140,32 +124,33 @@ class SoundPool {
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
                 this.sounds[i].aud.volume = volume;
+                return;
             }
         }
     }
 
-    pause(name) {
+    pause(name, max_play_time = 0) {
         // return false;
         for (let i = 0; i < this.sounds.length; i++) {
             if (this.sounds[i].name == name) {
 
-                setTimeout((function () {
+                setTimeout((function () { // max_play_time from outside
+                    let intrvl = max_play_time - this.sounds[i].aud.currentTime;
                     try {
-
-                        if (this.sounds[i].aud._playing) {
-                            this.sounds[i].aud.pause();
-                            this.sounds[i].aud.currentTime = 0;
-                            this.sounds[i].aud._playing = false; // ? what am i doing ?
-                        } else {
-                               setTimeout((function(){
-                                   this.pause(name);
-                               }).bind(this),10); // ? 😭😭😭😭
+                        if (intrvl < 0) {
+                            if (!this.sounds[i].aud.paused) {
+                                // console.log('S',name);
+                                this.sounds[i].aud.currentTime = 0;
+                                this.sounds[i].aud.pause();
+                                return;
+                            }
                         }
-                    } catch (err) {
+                    } catch (err) { }
 
-                    }
+
                 }).bind(this), 0);
 
+                return;
             }
         }
     }
