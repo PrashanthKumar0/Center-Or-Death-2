@@ -11,5 +11,4 @@ A simple javascript game .
     I am just Done with it 😑.
     I feel like i am wasting my time on stupid game rather than learning C++.
     I will be glad if someone took this away 
-    and do whatever they need and just leme.
-    
+    and do whatever they need and just leme Know about it.
